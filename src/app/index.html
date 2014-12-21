@@ -1,0 +1,37 @@
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Tic-Tac-Toe!</title>
+    <script src="lib/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="app-controller.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Fredericka+the+Great' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body ng-controller="AppController as game">
+<h1 class="title-text">Tic-Tac-Toe!</h1>
+
+<div class="container">
+    <div class="grid">
+        <div class="cell" ng-repeat="cell in game.data.cells track by $index"
+             ng-style="{'width': game.containerPct + '%', 'height': game.containerPct + '%'}"
+             ng-click="game.mark($index)">
+            <div class="cell-content" ng-switch="game.data.cells[$index]">
+                <div class="mark x animated bounceIn" ng-switch-when="1"></div>
+                <div class="mark o animated bounceIn" ng-switch-when="-1"></div>
+                <div ng-switch-default></div>
+            </div>
+        </div>
+    </div>
+</div>
+<span class="footer-text">&copy; 2014 - Thomas Keschl</span>
+
+<div class="dialog" ng-show="game.data.gameOver">
+    <div class="dialog-text animated zoomIn">
+        <span class="declaration">Game Over!</span>
+        <span class="player-name">{{game.data.winner}} has won!</span>
+        <span class="declaration button" ng-click="game.init()">Reset</span>
+    </div>
+</div>
+</body>
+</html>
